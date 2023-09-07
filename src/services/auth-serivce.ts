@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-debugger */
 import axios from "axios";
 import "dotenv";
 const URL_DB = process.env.AUTH_API_URL;

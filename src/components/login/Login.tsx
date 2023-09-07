@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-debugger */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Login.css";
-import UseAuthentication from "../../hook/UseAuth";
+
 import { validUser } from "../../services/auth-serivce";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState("");
   const changeEmailHandler = (e: any) => {
     setEmail(e.target.value);
@@ -24,8 +20,8 @@ const LoginPage = () => {
   const loginHandler = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await validUser(email, password);
-      setIsSubmit(true);
+      await validUser(email, password);
+
       alert("Usuário logado");
     } catch (err: any) {
       if (
@@ -43,11 +39,6 @@ const LoginPage = () => {
       }
     }
   };
-
-  // useEffect(() => {
-  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //   }
-  // }, [formErrors]);
 
   return (
     <div className="page">

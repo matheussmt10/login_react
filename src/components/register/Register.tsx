@@ -1,19 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-debugger */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from "react";
+
+import { useState } from "react";
 import "./Register.css";
-import UseAuthentication from "../../hook/UseAuth";
-import { createAccount, validUser } from "../../services/auth-serivce";
-import { Navigate, useNavigate } from "react-router-dom";
+
+import { createAccount } from "../../services/auth-serivce";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const changeNameHandler = (e: any) => {
@@ -34,8 +31,7 @@ const Register = () => {
   const loginHandler = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await createAccount(name, email, password, confirmPassword);
-      setIsSubmit(true);
+      await createAccount(name, email, password, confirmPassword);
       alert("Conta criada com sucesso");
       navigate("/login", { replace: true });
     } catch (err: any) {

@@ -1,16 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import "./Home.css";
 import { Login, Register } from "../../components";
-import { useState } from "react";
-import {
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-  useLocation,
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 function Home() {
   return (
     <Routes>
