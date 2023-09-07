@@ -1,6 +1,6 @@
 import axios from "axios";
 import "dotenv";
-const URL_DB = process.env.REACT_APP_AUTH_API_URL;
+const URL_DB = process.env.VITE_AUTH_API_URL;
 
 const validUser = async (email: string, password: string) => {
   const result = await axios.post(
@@ -11,7 +11,7 @@ const validUser = async (email: string, password: string) => {
     },
     {
       headers: {
-        "x-api-key": process.env.REACT_APP_X_API_KEY,
+        "x-api-key": process.env.VITE_X_API_KEY,
       },
     }
   );
