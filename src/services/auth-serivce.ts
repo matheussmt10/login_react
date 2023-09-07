@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-debugger */
 import axios from "axios";
-const URL_DB =
-  "https://us-east1-m-services-395301.cloudfunctions.net/ms-auth-v2-prd-HttpHandler";
+import "dotenv";
+const URL_DB = process.env.AUTH_API_URL;
 
 const validUser = async (email: string, password: string) => {
   const result = await axios.post(
@@ -13,7 +13,7 @@ const validUser = async (email: string, password: string) => {
     },
     {
       headers: {
-        "x-api-key": "dbb4b052-23b9-48c4-b885-9751d8be0dc5",
+        "x-api-key": process.env.X_API_KEY,
       },
     }
   );
@@ -32,7 +32,7 @@ const createAccount = async (
     { name, email, password, confirmPassword },
     {
       headers: {
-        "x-api-key": "dbb4b052-23b9-48c4-b885-9751d8be0dc5",
+        "x-api-key": process.env.X_API_KEY,
       },
     }
   );
