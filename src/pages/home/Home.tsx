@@ -6,7 +6,7 @@ function Home() {
     <>
       <p>teste</p>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Login />
         <Route path="/register" element={<Register />} />
       </Routes>
     </>
