@@ -30,7 +30,7 @@ const createAccount = async (
     { name, email, password, confirmPassword },
     {
       headers: {
-        "x-api-key": process.env.VITE_REACT_APP_X_API_KEY,
+        "x-api-key": import.meta.env.VITE_REACT_APP_X_API_KEY,
       },
     }
   );
