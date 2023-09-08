@@ -4,8 +4,8 @@ import { Routes, Route } from "react-router-dom";
 function Home() {
   return (
     <>
-      <Login />
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </>

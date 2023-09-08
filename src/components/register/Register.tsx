@@ -7,6 +7,7 @@ import { createAccount } from "../../services/auth-serivce";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,9 +32,11 @@ const Register = () => {
   const loginHandler = async (e: any) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await createAccount(name, email, password, confirmPassword);
       alert("Conta criada com sucesso");
-      navigate("/login", { replace: true });
+      setLoading(false);
+      navigate("/", { replace: true });
     } catch (err: any) {
       if (
         err.response &&
@@ -50,6 +53,7 @@ const Register = () => {
           err.response.data.message = "As senhas não combinam";
         }
         setError(err.response.data.message);
+        setLoading(false);
       }
     }
   };
@@ -66,6 +70,7 @@ const Register = () => {
           autoFocus={true}
           value={name}
           onChange={changeNameHandler}
+          required
         />
         <label htmlFor="email">E-mail</label>
         <input
@@ -73,6 +78,7 @@ const Register = () => {
           placeholder="Digite seu e-mail"
           value={email}
           onChange={changeEmailHandler}
+          required
         />
         <label htmlFor="password">Senha</label>
         <input
@@ -80,6 +86,7 @@ const Register = () => {
           placeholder="Digite sua senha"
           value={password}
           onChange={changePasswordHandler}
+          required
         />
         <label htmlFor="confirmPassword">Confirmar Senha</label>
         <input
@@ -87,13 +94,22 @@ const Register = () => {
           placeholder="Digite sua senha novamente"
           value={confirmPassword}
           onChange={changeConfirmPasswordHandler}
+          required
         />
         {error && (
           <div className="errorDiv">
             <span className="errorText">{error}</span>
           </div>
         )}
-        <input type="submit" value="Criar" className="btn" />
+        <button type="submit" className="btn">
+          {loading && (
+            <i
+              className="fa fa-refresh fa-spin"
+              style={{ marginRight: "5px" }}
+            />
+          )}
+          {!loading && <span>Criar</span>}
+        </button>
       </form>
     </div>
   );

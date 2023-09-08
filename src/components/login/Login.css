@@ -81,8 +81,9 @@ body {
   font-weight: 600;
   border: none !important;
   transition: all linear 160ms;
+  border-radius: 0.3rem;
   cursor: pointer;
-  margin: 0 !important;
+  height: 3rem;
 }
 
 .btn:hover {

@@ -6,6 +6,7 @@ import { validUser } from "../../services/auth-serivce";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,9 +21,11 @@ const LoginPage = () => {
   const loginHandler = async (e: any) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await validUser(email, password);
 
       alert("Usuário logado");
+      setLoading(false);
     } catch (err: any) {
       if (
         err.response &&
@@ -36,6 +39,7 @@ const LoginPage = () => {
           err.response.data.message = "Senha incorreta";
         }
         setError(err.response.data.message);
+        setLoading(false);
       }
     }
   };
@@ -68,7 +72,16 @@ const LoginPage = () => {
         <Link to="/forget-password">
           <label className="right-label">Esqueceu sua senha?</label>
         </Link>
-        <input type="submit" value="Acessar" className="btn" />
+        <button type="submit" className="btn">
+          {loading && (
+            <i
+              className="fa fa-refresh fa-spin"
+              style={{ marginRight: "5px" }}
+            />
+          )}
+          {!loading && <span>Acessar</span>}
+        </button>
+
         <div className="createAccountDiv">
           <Link to="/register">Criar uma nova conta</Link>
         </div>
