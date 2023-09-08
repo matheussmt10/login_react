@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import "./Register.css";
 
 import { createAccount } from "../../services/auth-serivce";
@@ -14,22 +14,25 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const changeNameHandler = (e: any) => {
+
+  const changeNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const changeConfirmPasswordHandler = (e: any) => {
+  const changeConfirmPasswordHandler = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setConfirmPassword(e.target.value);
   };
-  const changeEmailHandler = (e: any) => {
+  const changeEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const changePasswordHandler = (e: any) => {
+  const changePasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const loginHandler = async (e: any) => {
+  const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
