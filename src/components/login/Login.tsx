@@ -1,24 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import "./Login.css";
-
 import { validUser } from "../../services/auth-serivce";
 import { Link } from "react-router-dom";
-
+import { GoogleLogin } from "react-google-login";
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const changeEmailHandler = (e: any) => {
+  const changeEmailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const changePasswordHandler = (e: any) => {
+  const changePasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const loginHandler = async (e: any) => {
+  const loginHandler = async (e: FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
@@ -42,6 +41,10 @@ const LoginPage = () => {
         setLoading(false);
       }
     }
+  };
+
+  const googleResponse = (response: any) => {
+    console.log(response);
   };
 
   return (
@@ -83,7 +86,11 @@ const LoginPage = () => {
           )}
           {!loading && <span>Acessar</span>}
         </button>
-
+        <GoogleLogin
+          clientId="358761533734-6bo3j5vl6hvmc7dalfs4g0b9du9rbdt7.apps.googleusercontent.com"
+          buttonText="Continuar com o Google"
+          onSuccess={googleResponse}
+        />
         <div className="createAccountDiv">
           <Link to="/register">Criar uma nova conta</Link>
         </div>
