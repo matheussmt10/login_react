@@ -56,6 +56,7 @@ const LoginPage = () => {
           autoFocus={true}
           value={email}
           onChange={changeEmailHandler}
+          required
         />
         <label htmlFor="password">Senha</label>
         <input
@@ -63,6 +64,7 @@ const LoginPage = () => {
           placeholder="Digite sua senha"
           value={password}
           onChange={changePasswordHandler}
+          required
         />
         {error && (
           <div className="errorDiv">
