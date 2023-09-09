@@ -90,6 +90,7 @@ const LoginPage = () => {
           clientId="358761533734-6bo3j5vl6hvmc7dalfs4g0b9du9rbdt7.apps.googleusercontent.com"
           buttonText="Continuar com o Google"
           onSuccess={googleResponse}
+          cookiePolicy="single_host_origin"
         />
         <div className="createAccountDiv">
           <Link to="/register">Criar uma nova conta</Link>
