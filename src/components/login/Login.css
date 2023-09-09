@@ -109,3 +109,9 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.btnGoogle {
+  margin-top: 0.5rem !important;
+  text-align: center !important;
+  justify-content: center;
+}

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import "./Login.css";
 import { validUser } from "../../services/auth-serivce";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -43,7 +44,18 @@ const LoginPage = () => {
     }
   };
 
-  const googleResponse = (response: any) => {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: import.meta.env.VITE_REACT_APP_GOOGLE_AUTH_ID,
+        scope: "email",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  }, []);
+
+  const onSuccess = (response: any) => {
     console.log(response);
   };
 
@@ -87,10 +99,11 @@ const LoginPage = () => {
           {!loading && <span>Acessar</span>}
         </button>
         <GoogleLogin
-          clientId="358761533734-6bo3j5vl6hvmc7dalfs4g0b9du9rbdt7.apps.googleusercontent.com"
+          clientId={import.meta.env.VITE_REACT_APP_GOOGLE_AUTH_ID}
           buttonText="Continuar com o Google"
-          onSuccess={googleResponse}
+          onSuccess={onSuccess}
           cookiePolicy="single_host_origin"
+          className="btnGoogle"
         />
         <div className="createAccountDiv">
           <Link to="/register">Criar uma nova conta</Link>
