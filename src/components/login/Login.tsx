@@ -66,9 +66,9 @@ const LoginPage = () => {
         profileObj.googleId,
         profileObj.imageUrl
       );
-      alert(result);
+      alert(result?.data.message);
     } catch (error: any) {
-      setError(error.response.data.message);
+      setError(error.response);
     }
   };
 
