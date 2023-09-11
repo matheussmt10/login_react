@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FormEvent, useEffect, useState } from "react";
 import "./Login.css";
-import { validUser } from "../../services/auth-serivce";
+import { socialAuth, validUser } from "../../services/auth-serivce";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
@@ -55,8 +55,19 @@ const LoginPage = () => {
     gapi.load("client:auth2", start);
   }, []);
 
-  const onSuccess = (response: any) => {
-    console.log(response);
+  const onSuccess = async (response: any) => {
+    try {
+      const { profileObj } = response;
+      const result = await socialAuth(
+        profileObj.name,
+        profileObj.email,
+        profileObj.googleId,
+        profileObj.imageUrl
+      );
+      alert(result);
+    } catch (error: any) {
+      setError(error.response.data.message);
+    }
   };
 
   return (

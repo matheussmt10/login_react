@@ -38,4 +38,23 @@ const createAccount = async (
   return result;
 };
 
-export { validUser, createAccount };
+const socialAuth = async (
+  name: string,
+  email: string,
+  googleId: string,
+  userPhoto: string
+) => {
+  const result = await axios.post(
+    `${URL_DB}/api/social-auth`,
+    { name, email, googleId, userPhoto },
+    {
+      headers: {
+        "x-api-key": import.meta.env.VITE_REACT_APP_X_API_KEY,
+      },
+    }
+  );
+
+  return result;
+};
+
+export { validUser, createAccount, socialAuth };
