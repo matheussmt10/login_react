@@ -1,7 +1,7 @@
 import axios from "axios";
 import "dotenv";
 const URL_DB = import.meta.env.VITE_REACT_APP_AUTH_API_URL;
-
+const u = "localhost:8888";
 const validUser = async (email: string, password: string) => {
   const result = await axios.post(
     `${URL_DB}/api/login`,
@@ -45,7 +45,7 @@ const socialAuth = async (
   userPhoto: string
 ) => {
   const result = await axios.post(
-    `${URL_DB}/api/social-auth`,
+    `${u}/api/social-auth`,
     { name, email, googleId, userPhoto },
     {
       headers: {

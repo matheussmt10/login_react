@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FormEvent, useEffect, useState } from "react";
 import "./Login.css";
@@ -58,6 +59,7 @@ const LoginPage = () => {
   const onSuccess = async (response: any) => {
     try {
       const { profileObj } = response;
+      debugger;
       const result = await socialAuth(
         profileObj.name,
         profileObj.email,
