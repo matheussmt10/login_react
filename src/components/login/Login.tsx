@@ -59,7 +59,6 @@ const LoginPage = () => {
   const onSuccess = async (response: any) => {
     try {
       const { profileObj } = response;
-      debugger;
       const result = await socialAuth(
         profileObj.name,
         profileObj.email,
